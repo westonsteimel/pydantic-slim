@@ -14,7 +14,8 @@ mkdir -p dist
     fi
 
     echo "slimming wheels for pydantic version ${PYDANTIC_VERSION}"
-    
+   
+    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 pydantic==${PYDANTIC_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 pydantic==${PYDANTIC_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_x86_64 pydantic==${PYDANTIC_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux2014_x86_64 pydantic==${PYDANTIC_VERSION}
@@ -29,7 +30,7 @@ mkdir -p dist
     done
 
     pip uninstall -y --disable-pip-version-check pydantic
-    pip install --disable-pip-version-check pydantic -f .
+    pip install --disable-pip-version-check pydantic==${PYDANTIC_VERSION} -f .
 
     python -c "
 import pydantic
